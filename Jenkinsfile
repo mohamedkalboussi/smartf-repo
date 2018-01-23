@@ -17,6 +17,7 @@ pipeline {
             steps {
                 echo 'Testing..'
 				sh 'docker ps'
+				sh 'pwd'
             }
         }
         stage('Deploy') {
