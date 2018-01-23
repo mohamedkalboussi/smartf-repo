@@ -12,12 +12,12 @@ pipeline {
         stage('Build') {
 			agent {
                 docker {
-                    image 'maven:3.5.0-jdk-8'
+                    image 'maven:3-alpine'
                 }
             }
             steps {
                 echo 'Building..'
-				sh 'pwd'
+				sh 'mvn --version'
             }
         }
         stage('Deploy') {
