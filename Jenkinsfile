@@ -17,7 +17,9 @@ pipeline {
                 }
             }
             steps {
+				
                 echo 'Building..'
+				sh 'whoami'
 				// sh 'mvn --version'
             }
         }
