@@ -17,7 +17,7 @@ pipeline {
             }
             steps {
                 echo 'Building..'
-				sh 'mvn --version'
+				sh 'pwd'
             }
         }
         stage('Deploy') {
