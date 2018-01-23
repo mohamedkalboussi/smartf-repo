@@ -10,7 +10,7 @@ pipeline {
             }
             steps {
                 echo 'Building..'
-				sh "mvn -v"
+				sh "docker ps"
             }
         }
         stage('Test') {
