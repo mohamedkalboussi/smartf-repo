@@ -2,6 +2,13 @@ pipeline {
     agent any
 
     stages {
+		stage('Test') {
+            steps {
+                echo 'Testing..'
+				sh 'docker ps'
+				sh 'pwd'
+            }
+        }
         stage('Build') {
 			agent {
                 docker {
@@ -9,14 +16,7 @@ pipeline {
                 }
             }
             steps {
-                echo 'Building..'
-				
-            }
-        }
-        stage('Test') {
-            steps {
-                echo 'Testing..'
-				sh 'docker ps'
+                echo 'Building..'		
             }
         }
         stage('Deploy') {
