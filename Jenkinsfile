@@ -1,9 +1,5 @@
 pipeline {
     agent any
-	
-	options {
-		buildDiscarder(logRotator(daysToKeepStr: '1'))
-	}
 
     stages {
 		stage('Test') {
@@ -11,6 +7,14 @@ pipeline {
                 echo 'Testing..'
 				sh 'docker ps'
 				sh 'pwd'
+            }
+        }
+		stage('Front-end') {
+            agent {
+                docker { image 'node:7-alpine' }
+            }
+            steps {
+                sh 'node --version'
             }
         }
         stage('Build') {
