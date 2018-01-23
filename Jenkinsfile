@@ -9,14 +9,6 @@ pipeline {
 				sh 'pwd'
             }
         }
-		stage('Front-end') {
-            agent {
-                docker { image 'node:7-alpine' }
-            }
-            steps {
-                sh 'node --version'
-            }
-        }
         stage('Build') {
 			agent {
                 docker {
@@ -25,8 +17,10 @@ pipeline {
                 }
             }
             steps {
-                echo 'Building..'
-				sh 'mvn --version'
+				dir('back') {				
+					echo 'Building..'
+					sh 'mvn --version'
+				}
             }
         }
         stage('Deploy') {
