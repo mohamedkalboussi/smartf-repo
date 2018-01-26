@@ -7,7 +7,7 @@ pipeline {
                 echo 'Testing..'
 				sh 'docker ps'
 				sh 'pwd'
-				sh 'docker run -t -u root -v /F:/Formations/Docker:/root/.m2 maven:3.5.0-jdk-8 ./mvnw -v'
+				sh 'docker run -t -u root -v F:/Formations/Docker:/root/.m2 maven:3.5.0-jdk-8 ./mvnw -v'
             }
         }
         stage('Build') {
