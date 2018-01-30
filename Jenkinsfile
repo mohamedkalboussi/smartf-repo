@@ -20,7 +20,7 @@ pipeline {
                 }
             }
             steps {
-				'${env.PATH}' = '/usr/local/bin'
+				//'${env.PATH}' = '/usr/local/bin'
                 echo 'Building..'
 				sh 'whoami'
 				// sh 'mvn --version'
