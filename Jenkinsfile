@@ -5,7 +5,8 @@ pipeline {
 		stage('Test') {
             steps {
                 echo 'Testing..'
-				echo ${env.PATH} ${env.BUILD_NUMBER}
+				echo ${env.PATH}
+				echo ${env.BUILD_NUMBER}
 				sh 'docker ps'
 				sh 'pwd'
             }
@@ -19,6 +20,7 @@ pipeline {
                 }
             }
             steps {
+				env.PATH = "/usr/local/bin"
                 echo 'Building..'
 				sh 'whoami'
 				// sh 'mvn --version'
