@@ -8,8 +8,8 @@ pipeline {
 				sh 'docker ps'
 				sh 'pwd'
 				sh '''
-                    echo "Job name = ${env.JOB_NAME}"
-                    echo "Build number = ${env.BUILD_NUMBER}"
+                    echo "${env.JOB_NAME}"
+                    echo "${env.BUILD_NUMBER}"
                 '''
             }
         }
