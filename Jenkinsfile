@@ -5,6 +5,7 @@ pipeline {
 		stage('Test') {
             steps {
                 echo 'Testing..'
+				echo ${env.PATH} ${env.BUILD_NUMBER}
 				sh 'docker ps'
 				sh 'pwd'
             }
