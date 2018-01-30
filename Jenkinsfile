@@ -1,16 +1,15 @@
 pipeline {
     agent any
-
+	tools {
+        maven 'myMaven'
+    }
+	
     stages {
 		stage('Test') {
             steps {
                 echo 'Testing..'
 				sh 'docker ps'
 				sh 'pwd'
-				sh '''
-                    echo "${env.JOB_NAME}"
-                    echo "${env.BUILD_NUMBER}"
-                '''
             }
         }
         stage('Build') {
