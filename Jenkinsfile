@@ -7,7 +7,7 @@ pipeline {
                 echo 'Testing..'
 				sh 'docker ps'
 				sh 'pwd'
-				sh 'docker run -t -u root maven:3.5.0-jdk-8 ./mvnw -v'
+				sh 'docker run -t -u root -w F:/Formations/Docker/jenkins_home/workspace/uri-templates-in-docker -v F:/Formations/Docker/jenkins_home:/var/jenkins_home/workspace/uri-templates-in-docker:rw maven:3.5.0-jdk-8 ./mvnw -v'
             }
         }
         stage('Build') {
