@@ -19,7 +19,7 @@ pipeline {
             }
             steps {
                 sh 'mvn --version'
-				sh 'cd smartf-back && mvn clean install'
+				sh 'cd smartf-back && mvn clean package'
             }
         }
         stage('Deploy') {
