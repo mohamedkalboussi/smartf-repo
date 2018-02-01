@@ -19,7 +19,6 @@ pipeline {
                 docker {
 				    reuseNode true
                     image 'maven:3.5.0-jdk-8'
-					args '-u 1000'
                 }
             }
             steps {
