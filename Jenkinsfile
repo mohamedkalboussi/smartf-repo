@@ -1,8 +1,5 @@
 pipeline {
     agent any
-	//tools {
-      //  maven 'myMaven'
-    //}
 	
     stages {
 		stage('Test') {
@@ -11,7 +8,6 @@ pipeline {
 				sh 'docker ps'
 				sh 'pwd'
 				sh 'whoami'
-				//sh 'mvn -v'
             }
         }
         stage('Build') {
