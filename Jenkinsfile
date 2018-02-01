@@ -10,6 +10,7 @@ pipeline {
                 echo 'Testing..'
 				sh 'docker ps'
 				sh 'pwd'
+				sh 'whoami'
 				//sh 'mvn -v'
             }
         }
@@ -18,7 +19,7 @@ pipeline {
                 docker {
 				    reuseNode true
                     image 'maven:3.5.0-jdk-8'
-					args '-u root -u 1000 -v /tmp:/tmp'
+					args '-u 1000'
                 }
             }
             steps {
