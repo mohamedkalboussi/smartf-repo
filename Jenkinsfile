@@ -8,7 +8,7 @@ pipeline {
 		stage('Test') {
             steps {
                 echo 'Testing..'
-				sh 'docker ps'
+				sh 'sudo docker ps'
 				//sh 'pwd'
 				//sh 'mvn -v'
             }
