@@ -65,7 +65,7 @@ pipeline {
 				stage('Push Image Docker to Artifactory (back)') {
 					steps {
 						sh 'docker tag smartf-back-image smartf/back:lts'
-						sh 'docker push smartf/back:lts'
+						//sh 'docker push smartf/back:lts'
 					}
 				}
 				stage('Push Image Docker to Artifactory (front)') {
