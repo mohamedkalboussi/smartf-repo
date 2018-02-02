@@ -42,6 +42,24 @@ pipeline {
 				}
 			}
         }
+		stage('Build Image Docker') {
+			parallel {
+				stage('Build Image Docker (back)') {
+					steps {
+						dir('smartf-back') {
+							sh 'docker build -t back-image .'
+						}
+					}
+				}
+				stage('Build Image Docker (front)') {
+					steps {
+						dir('smartf-front') {
+							//sh 'docker build -t front-image .'
+						}
+					}
+				}
+			}
+        }
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
