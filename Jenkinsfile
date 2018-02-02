@@ -65,8 +65,11 @@ pipeline {
 				stage('Push Image Docker to Artifactory (back)') {
 					environment {
 						//Use "Pipeline Utility Steps" plugin to read information from pom.xml into env variables
-						IMAGE = readMavenPom('smartf-back').getArtifactId()
-						VERSION = readMavenPom('smartf-back').getVersion()
+						//IMAGE = readMavenPom().getArtifactId()
+						//VERSION = readMavenPom().getVersion()
+						POM = readMavenPom file: 'smartf-back/pom.xml'
+						IMAGE = POM.artifactId
+						VERSION = POM.version
 					 }
 					steps {
 						sh 'docker tag smartf-back-image ${IMAGE}:${VERSION}'
