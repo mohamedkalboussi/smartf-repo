@@ -75,6 +75,7 @@ pipeline {
 				}
 				stage('Push Image Docker to Artifactory (front)') {
 					steps {
+						echo 'Push Image Docker to Artifactory (front)...'
 						//sh 'docker tag smartf-front-image smartf-front-image:ltsss'
 						//sh 'docker push ${IMAGE}:${VERSION}'
 					}
