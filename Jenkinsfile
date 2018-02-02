@@ -72,7 +72,8 @@ pipeline {
 						//version = pom.version
 					 }
 					steps {
-						sh 'docker tag smartf-back-image ${pom.artifactId}:${pom.version}'
+						echo '==> ${pom.artifactId}:${pom.version}'
+						//sh 'docker tag smartf-back-image ${pom.artifactId}:${pom.version}'
 						//sh 'docker push ${pom.artifactId}:${pom.version}'
 					}
 				}
