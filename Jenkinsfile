@@ -63,25 +63,16 @@ pipeline {
 		stage('Push Image Docker to Artifactory') {
 			parallel {
 				stage('Push Image Docker to Artifactory (back)') {
-					environment {
-						//Use "Pipeline Utility Steps" plugin to read information from pom.xml into env variables
-						//IMAGE = readMavenPom().getArtifactId()
-						//VERSION = readMavenPom().getVersion()
-						pom = readMavenPom file: 'smartf-back/pom.xml'
-						//image = pom.artifactId
-						//version = pom.version
-					 }
 					steps {
-						echo '==> ${pom.artifactId}:${pom.version}'
-						//sh 'docker tag smartf-back-image ${pom.artifactId}:${pom.version}'
-						//sh 'docker push ${pom.artifactId}:${pom.version}'
+						sh 'docker tag smartf-back-image smartf/back:lts'
+						sh 'docker push smartf/back:lts'
 					}
 				}
 				stage('Push Image Docker to Artifactory (front)') {
 					steps {
 						echo 'Push Image Docker to Artifactory (front)...'
-						//sh 'docker tag smartf-front-image smartf-front-image:ltsss'
-						//sh 'docker push ${IMAGE}:${VERSION}'
+						//sh 'docker tag smartf-back-image smartf/back:lts'
+						//sh 'docker push smartf/back:lts'
 					}
 				}
 			}
