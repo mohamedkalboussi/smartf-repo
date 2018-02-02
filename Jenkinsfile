@@ -67,9 +67,9 @@ pipeline {
 						//Use "Pipeline Utility Steps" plugin to read information from pom.xml into env variables
 						//IMAGE = readMavenPom().getArtifactId()
 						//VERSION = readMavenPom().getVersion()
-						POM = readMavenPom file: 'smartf-back/pom.xml'
-						IMAGE = POM.artifactId
-						VERSION = POM.version
+						pom = readMavenPom file: 'smartf-back/pom.xml'
+						IMAGE = pom.artifactId
+						VERSION = pom.version
 					 }
 					steps {
 						sh 'docker tag smartf-back-image ${IMAGE}:${VERSION}'
