@@ -47,14 +47,14 @@ pipeline {
 				stage('Build Image Docker (back)') {
 					steps {
 						dir('smartf-back') {
-							sh 'docker build -t back-image .'
+							sh 'docker build -t smartf-back-image .'
 						}
 					}
 				}
 				stage('Build Image Docker (front)') {
 					steps {
 						dir('smartf-front') {
-							//sh 'docker build -t front-image .'
+							//sh 'docker build -t smartf-front-image .'
 						}
 					}
 				}
