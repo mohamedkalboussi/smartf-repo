@@ -68,12 +68,12 @@ pipeline {
 						//IMAGE = readMavenPom().getArtifactId()
 						//VERSION = readMavenPom().getVersion()
 						pom = readMavenPom file: 'smartf-back/pom.xml'
-						image = pom.artifactId
-						version = pom.version
+						//image = pom.artifactId
+						//version = pom.version
 					 }
 					steps {
-						sh 'docker tag smartf-back-image ${image}:${version}'
-						//sh 'docker push ${image}:${version}'
+						sh 'docker tag smartf-back-image ${pom.artifactId}:${pom.version}'
+						//sh 'docker push ${pom.artifactId}:${pom.version}'
 					}
 				}
 				stage('Push Image Docker to Artifactory (front)') {
