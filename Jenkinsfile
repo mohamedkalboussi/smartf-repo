@@ -22,17 +22,25 @@ pipeline {
 				}
 			}
 		}
-        stage('Build') {
-			agent {
-                docker {
-				    reuseNode true
-                    image 'maven:3.5.0-jdk-8'
-                }
-            }
-            steps {
-                sh 'mvn --version'
-				sh 'cd smartf-back && mvn clean package'
-            }
+        stage('Build Artifact') {
+			parallel {
+				stage('Build Artifact (back)') {
+					agent {
+						docker {
+							reuseNode true
+							image 'maven:3.5.0-jdk-8'
+						}
+					}
+					steps {
+						sh 'cd smartf-back && mvn -DskipTests clean package'
+					}
+				}
+				stage('Build Artifact (front)') {
+					steps {
+						sh 'cd smartf-front'
+					}
+				}
+			}
         }
         stage('Deploy') {
             steps {
