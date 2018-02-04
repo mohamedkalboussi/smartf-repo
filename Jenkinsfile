@@ -4,7 +4,17 @@ pipeline {
     stages {
 		stage('Unit Tests') {
 			parallel {
-				
+				stage('Unit Tests (back)') {
+					agent {
+						docker {
+							reuseNode true
+							image 'maven:3.5.0-jdk-8'
+						}
+					}
+					steps {
+						sh 'cd smartf-back && mvn clean test'
+					}
+				}
 				stage('Unit Tests (front)') {
 					agent {
 						docker {
@@ -31,7 +41,17 @@ pipeline {
 		}
         stage('Build Artifact') {
 			parallel {
-				
+				stage('Build Artifact (back)') {
+					agent {
+						docker {
+							reuseNode true
+							image 'maven:3.5.0-jdk-8'
+						}
+					}
+					steps {
+						sh 'cd smartf-back && mvn -DskipTests clean package'
+					}
+				}
 				stage('Build Artifact (front)') {
 					agent {
 						docker {
@@ -47,7 +67,13 @@ pipeline {
         }
 		stage('Build Image Docker') {
 			parallel {
-				
+				stage('Build Image Docker (back)') {
+					steps {
+						dir('smartf-back') {
+							sh 'docker build -t smartf-back-image .'
+						}
+					}
+				}
 				stage('Build Image Docker (front)') {
 					steps {
 						dir('smartf-front') {
@@ -59,7 +85,12 @@ pipeline {
         }
 		stage('Push Image Docker to Artifactory') {
 			parallel {
-				
+				stage('Push Image Docker to Artifactory (back)') {
+					steps {
+						sh 'docker tag smartf-back-image smartf/back:lts'
+						//sh 'docker push smartf/back:lts'
+					}
+				}
 				stage('Push Image Docker to Artifactory (front)') {
 					steps {
 						sh 'docker tag smartf-front-image smartf/front:lts'
