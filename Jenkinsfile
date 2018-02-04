@@ -43,7 +43,7 @@ pipeline {
 						}
 					}
 					steps {
-						sh 'cd smartf-front && ng build'
+						sh 'cd smartf-front && npm install && ng build'
 					}
 				}
 			}
