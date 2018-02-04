@@ -36,8 +36,14 @@ pipeline {
 					}
 				}
 				stage('Build Artifact (front)') {
+					agent {
+						docker {
+							reuseNode true
+							image 'trion/ng-cli:1.6.7'
+						}
+					}
 					steps {
-						sh 'cd smartf-front'
+						sh 'cd smartf-front && ng build'
 					}
 				}
 			}
@@ -54,7 +60,7 @@ pipeline {
 				stage('Build Image Docker (front)') {
 					steps {
 						dir('smartf-front') {
-							//sh 'docker build -t smartf-front-image .'
+							sh 'docker build -t smartf-front-image .'
 						}
 					}
 				}
