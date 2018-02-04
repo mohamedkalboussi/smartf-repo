@@ -4,37 +4,34 @@ pipeline {
     stages {
 		stage('Unit Tests') {
 			parallel {
-				stage('Unit Tests (back)') {
+				
+				stage('Unit Tests (front)') {
 					agent {
 						docker {
 							reuseNode true
-							image 'maven:3.5.0-jdk-8'
+							image 'trion/ng-cli-karma:1.6.7'
 						}
 					}
 					steps {
-						sh 'cd smartf-back && mvn clean test'
+						sh 'cd smartf-front && npm install && ng test --watch false --single-run true'
 					}
 				}
-				stage('Unit Tests (front)') {
+				stage('Lint Tests (front)') {
+					agent {
+						docker {
+							reuseNode true
+							image 'trion/ng-cli-karma:1.6.7'
+						}
+					}
 					steps {
-						sh 'cd smartf-front'
+						sh 'cd smartf-front && npm install && ng lint'
 					}
 				}
 			}
 		}
         stage('Build Artifact') {
 			parallel {
-				stage('Build Artifact (back)') {
-					agent {
-						docker {
-							reuseNode true
-							image 'maven:3.5.0-jdk-8'
-						}
-					}
-					steps {
-						sh 'cd smartf-back && mvn -DskipTests clean package'
-					}
-				}
+				
 				stage('Build Artifact (front)') {
 					agent {
 						docker {
@@ -50,13 +47,7 @@ pipeline {
         }
 		stage('Build Image Docker') {
 			parallel {
-				stage('Build Image Docker (back)') {
-					steps {
-						dir('smartf-back') {
-							sh 'docker build -t smartf-back-image .'
-						}
-					}
-				}
+				
 				stage('Build Image Docker (front)') {
 					steps {
 						dir('smartf-front') {
@@ -68,17 +59,11 @@ pipeline {
         }
 		stage('Push Image Docker to Artifactory') {
 			parallel {
-				stage('Push Image Docker to Artifactory (back)') {
-					steps {
-						sh 'docker tag smartf-back-image smartf/back:lts'
-						//sh 'docker push smartf/back:lts'
-					}
-				}
+				
 				stage('Push Image Docker to Artifactory (front)') {
 					steps {
-						echo 'Push Image Docker to Artifactory (front)...'
-						//sh 'docker tag smartf-back-image smartf/back:lts'
-						//sh 'docker push smartf/back:lts'
+						sh 'docker tag smartf-front-image smartf/front:lts'
+						//sh 'docker push smartf/front:lts'
 					}
 				}
 			}
