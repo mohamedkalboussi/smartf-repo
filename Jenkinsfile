@@ -125,9 +125,13 @@ pipeline {
 				}
 			}
         }
-        stage('Deploy') {
+        stage('Deploy to Production') {
+			when {
+                branch 'master'
+            }
             steps {
-                echo 'Deploying....'
+				echo 'docker run --name smartf-back-app smartf/back:lts'
+                echo 'docker run --name smartf-front-app -p 9090:80 smartf/front:lts'
             }
         }
 		stage('Get Jenkins Infos') {
