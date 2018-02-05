@@ -82,7 +82,7 @@ pipeline {
 					agent {
 						docker {
 							reuseNode true
-							image 'trion/ng-cli:1.6.7'
+							image 'trion/ng-cli-karma:1.6.7'
 						}
 					}
 					steps {
