@@ -11,8 +11,8 @@ pipeline {
               //  branch 'master'
             //}
             steps {
-				echo 'docker run --name smartf-back-app -p 9090:8080 smartf-back-image'
-                echo 'docker run --name smartf-front-app -p 9091:80 smartf-front-image'
+				sh 'docker run --name smartf-back-app -p 9090:8080 smartf-back-image'
+                sh 'docker run --name smartf-front-app -p 9091:80 smartf-front-image'
             }
         }
 		stage('Get Jenkins Infos') {
