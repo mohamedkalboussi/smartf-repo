@@ -4,24 +4,7 @@ pipeline {
     stages {
 		
         
-		stage('Build Image Docker') {
-			parallel {
-				stage('Build Image Docker (back)') {
-					steps {
-						dir('smartf-back') {
-							sh 'docker build -t smartf-back-image .'
-						}
-					}
-				}
-				stage('Build Image Docker (front)') {
-					steps {
-						dir('smartf-front') {
-							sh 'docker build -t smartf-front-image .'
-						}
-					}
-				}
-			}
-        }
+		
 		
         stage('Deploy to Production') {
 			//when {
