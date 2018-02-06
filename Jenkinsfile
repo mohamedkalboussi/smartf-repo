@@ -28,7 +28,7 @@ pipeline {
 				}
 			}
 		}
-		stage('Unit Tests') {
+		//stage('Unit Tests') {
 			parallel {
 				stage('Unit Tests (back)') {
 					agent {
@@ -130,8 +130,8 @@ pipeline {
                 branch 'master'
             }
             steps {
-				echo 'docker run --name smartf-back-app smartf/back:lts'
-                echo 'docker run --name smartf-front-app -p 9090:80 smartf/front:lts'
+				echo 'docker run --name smartf-back-app -p 9090:8080 smartf/back:lts'
+                echo 'docker run --name smartf-front-app -p 9091:80 smartf/front:lts'
             }
         }
 		stage('Get Jenkins Infos') {
