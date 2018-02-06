@@ -3,32 +3,7 @@ pipeline {
 	
     stages {
 		
-        stage('Build Artifact') {
-			parallel {
-				stage('Build Artifact (back)') {
-					agent {
-						docker {
-							reuseNode true
-							image 'maven:3.5.0-jdk-8'
-						}
-					}
-					steps {
-						sh 'cd smartf-back && mvn -DskipTests clean package'
-					}
-				}
-				stage('Build Artifact (front)') {
-					agent {
-						docker {
-							reuseNode true
-							image 'trion/ng-cli-karma:1.6.7'
-						}
-					}
-					steps {
-						sh 'cd smartf-front && ng build'
-					}
-				}
-			}
-        }
+        
 		stage('Build Image Docker') {
 			parallel {
 				stage('Build Image Docker (back)') {
@@ -49,9 +24,9 @@ pipeline {
         }
 		
         stage('Deploy to Production') {
-			when {
-                branch 'master'
-            }
+			//when {
+              //  branch 'master'
+            //}
             steps {
 				echo 'docker run --name smartf-back-app -p 9090:8080 smartf-back-image'
                 echo 'docker run --name smartf-front-app -p 9091:80 smartf-front-image'
