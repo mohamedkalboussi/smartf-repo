@@ -141,6 +141,8 @@ pipeline {
                 branch 'master'
             }
             steps {
+				sh 'docker rm -f smartf-back-app'
+				sh 'docker rm -f smartf-front-app'
 				sh 'docker run --name smartf-back-app -p 9090:8080 -d smartf-back-image'
                 sh 'docker run --name smartf-front-app -p 9091:80 -d --link smartf-back-app:smartf-back-app smartf-front-image'
             }
